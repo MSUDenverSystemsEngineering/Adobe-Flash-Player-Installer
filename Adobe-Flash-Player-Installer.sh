@@ -11,7 +11,7 @@ flash_version=`/usr/bin/curl --silent http://fpdownload2.macromedia.com/get/flas
 installed_flash_version=`/usr/bin/defaults read "/Library/Internet Plug-Ins/Flash Player.plugin/Contents/version" CFBundleShortVersionString`
 # Specify the complete address of the Adobe Flash Player
 # disk image
-fileURL="https://fpdownload.adobe.com/get/flashplayer/pdc/"$flash_version"/install_flash_player_osx.dmg"
+fileURL="https://fpdownload.adobe.com/get/flashplayer/pdc/${flash_version}/install_flash_player_osx.dmg"
 
 # Specify name of downloaded disk image
 flash_dmg="/tmp/flash.dmg"
