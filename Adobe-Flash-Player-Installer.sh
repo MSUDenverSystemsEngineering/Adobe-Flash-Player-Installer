@@ -7,8 +7,8 @@ osvers=$(sw_vers -productVersion | awk -F. '{print $2}')
 
 # Determine current major version of Adobe Flash for use
 # with the fileURL variable
-flash_version=`/usr/bin/curl --silent http://fpdownload2.macromedia.com/get/flashplayer/update/current/xml/version_en_mac_pl.xml | sed -n 's/.*update version="\([^"]*\).*/\1/p' | sed 's/,/./g'`
-installed_flash_version=`/usr/bin/defaults read "/Library/Internet Plug-Ins/Flash Player.plugin/Contents/version" CFBundleShortVersionString`
+flash_version=$(/usr/bin/curl --silent http://fpdownload2.macromedia.com/get/flashplayer/update/current/xml/version_en_mac_pl.xml | sed -n 's/.*update version="\([^"]*\).*/\1/p' | sed 's/,/./g')
+installed_flash_version=$(/usr/bin/defaults read "/Library/Internet Plug-Ins/Flash Player.plugin/Contents/version" CFBundleShortVersionString)
 # Specify the complete address of the Adobe Flash Player
 # disk image
 fileURL="https://fpdownload.adobe.com/get/flashplayer/pdc/${flash_version}/install_flash_player_osx.dmg"
@@ -27,7 +27,7 @@ if [[ ${osvers} -ge 6 ]]; then
     /usr/bin/curl --output "$flash_dmg" "$fileURL"
 
     # Specify a /tmp/flashplayer.XXXX mountpoint for the disk image
-    TMPMOUNT=`/usr/bin/mktemp -d /tmp/flashplayer.XXXX`
+    TMPMOUNT=$(/usr/bin/mktemp -d /tmp/flashplayer.XXXX)
 
     # Mount the latest Flash Player disk image to /tmp/flashplayer.XXXX mountpoint
     hdiutil attach "$flash_dmg" -mountpoint "$TMPMOUNT" -nobrowse -noverify -noautoopen
@@ -51,7 +51,7 @@ if [[ ${osvers} -ge 6 ]]; then
     pkg_path=""
     if [[ ${pkg_path} != "" ]]; then
       if [[ ${osvers} -ge 7 ]]; then
-        signature_check=`/usr/sbin/pkgutil --check-signature "$pkg_path" | awk /'Developer ID Installer/{ print $5 }'`
+        signature_check=$(/usr/sbin/pkgutil --check-signature "$pkg_path" | awk /'Developer ID Installer/{ print $5 }')
         if [[ ${signature_check} = "Adobe" ]]; then
           # Install Adobe Flash Player from the installer package stored inside the disk image
           /usr/sbin/installer -dumplog -verbose -pkg "${pkg_path}" -target "/"
@@ -77,7 +77,7 @@ if [[ ${osvers} -ge 6 ]]; then
     # Remove the downloaded disk image
     /bin/rm -rf "$flash_dmg"
   else
-    /bin/echo "`date`: Flash is already up to date, running ${installed_flash_version}."
+    /bin/echo "$(date): Flash is already up to date, running ${installed_flash_version}."
   fi
 fi
 
