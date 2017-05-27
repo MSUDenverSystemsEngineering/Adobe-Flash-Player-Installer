@@ -38,7 +38,7 @@ if [[ ${osvers} -ge 6 ]]; then
     if [[ -e "$(/usr/bin/find "$TMPMOUNT" -maxdepth 1 \( -iname '\*Flash*\.pkg' -o -iname '\*Flash*\.mpkg' \))" ]]; then
       pkg_path="$(/usr/bin/find "$TMPMOUNT" -maxdepth 1 \( -iname '\*Flash*\.pkg' -o -iname '\*Flash*\.mpkg' \))"
       elif [[ -e "$(/usr/bin/find "$TMPMOUNT" -maxdepth 1 \( -iname \*\.app \))" ]]; then
-      adobe_app=`(/usr/bin/find "$TMPMOUNT" -maxdepth 1 \( -iname \*\.app \))`
+      adobe_app=$(/usr/bin/find "$TMPMOUNT" -maxdepth 1 \( -iname \*\.app \))
       if [[ -e "$(/usr/bin/find "$adobe_app"/Contents/Resources -maxdepth 1 \( -iname '\*Flash*\.pkg' -o -iname '\*Flash*\.mpkg' \))" ]]; then
         pkg_path="$(/usr/bin/find "$adobe_app"/Contents/Resources -maxdepth 1 \( -iname '\*Flash*\.pkg' -o -iname '\*Flash*\.mpkg' \))"
       fi
