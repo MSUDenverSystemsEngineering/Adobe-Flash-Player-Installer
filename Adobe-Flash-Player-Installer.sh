@@ -35,10 +35,10 @@ if [[ ${osvers} -ge 6 ]]; then
     # Install Adobe Flash Player using the installer package. This installer may
     # be stored inside an install application on the disk image, or there may be
     # an installer package available at the root of the mounted disk image.
-    if [[ -e "$(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname '\*Flash*\.pkg' -o -iname '\*Flash*\.mpkg' \))" ]]; then
-      pkg_path="$(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname '\*Flash*\.pkg' -o -iname '\*Flash*\.mpkg' \))"
-      elif [[ -e "$(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname \*\.app \))" ]]; then
-      adobe_app=`(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname \*\.app \))`
+    if [[ -e "$(/usr/bin/find "$TMPMOUNT" -maxdepth 1 \( -iname '\*Flash*\.pkg' -o -iname '\*Flash*\.mpkg' \))" ]]; then
+      pkg_path="$(/usr/bin/find "$TMPMOUNT" -maxdepth 1 \( -iname '\*Flash*\.pkg' -o -iname '\*Flash*\.mpkg' \))"
+      elif [[ -e "$(/usr/bin/find "$TMPMOUNT" -maxdepth 1 \( -iname \*\.app \))" ]]; then
+      adobe_app=`(/usr/bin/find "$TMPMOUNT" -maxdepth 1 \( -iname \*\.app \))`
       if [[ -e "$(/usr/bin/find "$adobe_app"/Contents/Resources -maxdepth 1 \( -iname '\*Flash*\.pkg' -o -iname '\*Flash*\.mpkg' \))" ]]; then
         pkg_path="$(/usr/bin/find "$adobe_app"/Contents/Resources -maxdepth 1 \( -iname '\*Flash*\.pkg' -o -iname '\*Flash*\.mpkg' \))"
       fi
